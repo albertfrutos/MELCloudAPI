@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace MELCloudAPILib
 {
     public class User
-    {//
+    {
         public string AppVersion {get; set;} = "1.9.3.0";
         public string CaptchaChallenge { get; set; } = "";
         public string CaptchaResponse { get; set; } = "";
