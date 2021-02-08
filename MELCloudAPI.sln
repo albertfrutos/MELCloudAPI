@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MELCloudCommunicator", "MELCloudCommunicator\MELCloudCommunicator.csproj", "{54AD2A1C-16CE-41A0-B1BB-EF88B02CD8EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MELCloudAPILib", "MELCloudAPILib\MELCloudAPILib.csproj", "{64CE0A9D-91DA-4ABE-B794-F8ED134D106F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54AD2A1C-16CE-41A0-B1BB-EF88B02CD8EA}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{54AD2A1C-16CE-41A0-B1BB-EF88B02CD8EA}.Debug|anycpu.Build.0 = Debug|anycpu
+		{54AD2A1C-16CE-41A0-B1BB-EF88B02CD8EA}.Release|anycpu.ActiveCfg = Release|anycpu
+		{54AD2A1C-16CE-41A0-B1BB-EF88B02CD8EA}.Release|anycpu.Build.0 = Release|anycpu
+		{64CE0A9D-91DA-4ABE-B794-F8ED134D106F}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{64CE0A9D-91DA-4ABE-B794-F8ED134D106F}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{64CE0A9D-91DA-4ABE-B794-F8ED134D106F}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{64CE0A9D-91DA-4ABE-B794-F8ED134D106F}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B73472D0-5EC6-401D-97EF-A3E6BAE80CCF}
+	EndGlobalSection
+EndGlobal
