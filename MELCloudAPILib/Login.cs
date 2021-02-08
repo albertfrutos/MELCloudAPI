@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Net.Http;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MELCloudAPILib
 {
-    public class User
+    public class Login
     {
         public string AppVersion {get; set;} = "1.9.3.0";
         public string CaptchaChallenge { get; set; } = "";
@@ -48,38 +46,26 @@ namespace MELCloudAPILib
             SL = 25,  // Slovenian
         }
 
-        public string Login(string email, string password, Configuration config)
+        public string UserLogin(string email, string password, Configuration config)
         {
-            HttpClient _httpClient = new HttpClient();
-
-            var user = new User
+            var user = new Login
             {
                 Email = email,
                 Password = password,
                 Language = config.Language
             };
 
-            using (var content = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json"))
+            var response = new Utilities().SendHTTPRequestAsPost(user, config.BaseUrl + "/Login/Client.Login");
+
+            if (!String.IsNullOrEmpty(response["ErrorId"].ToString()))
             {
-                HttpResponseMessage result = _httpClient.PostAsync(config.BaseUrl + "/Login/Client.Login", content).Result;
-
-                if (result.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    return null;
-                }
-
-                var json = result.Content.ReadAsStringAsync().Result;
-                var response = JObject.Parse(json);
-
-                if (!String.IsNullOrEmpty(response["ErrorId"].ToString()))
-                {
-                    return null;
-                }
-
-                var token = GetUserToken(response.ToString()); 
-                return token;
+                return null;
             }
+
+            var token = GetUserToken(response.ToString()); 
+            return token;
         }
+        
 
         public string GetUserToken(string json)
         {
