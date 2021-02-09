@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MELCloudAPILib
@@ -8,11 +9,8 @@ namespace MELCloudAPILib
         public string AppVersion {get; set;} = "1.9.3.0";
         public string CaptchaChallenge { get; set; } = "";
         public string CaptchaResponse { get; set; } = "";
-
         public string Email { get; set; }
         public string Password { get; set; }
-
-
         public int Language { get; set; }
         public bool Persist { get; set; } = true;
 
@@ -46,7 +44,7 @@ namespace MELCloudAPILib
             SL = 25,  // Slovenian
         }
 
-        public string UserLogin(string email, string password, Configuration config)
+        public LoginReply UserLogin(string email, string password, Configuration config)
         {
             var user = new Login
             {
@@ -57,20 +55,22 @@ namespace MELCloudAPILib
 
             var response = new Utilities().SendHTTPRequestAsPost(user, config.BaseUrl + "/Login/Client.Login");
 
-            if (!String.IsNullOrEmpty(response["ErrorId"].ToString()))
+            if (response == null)
             {
                 return null;
             }
 
-            var token = GetUserToken(response.ToString()); 
-            return token;
+            LoginReply reply = JsonConvert.DeserializeObject<LoginReply>(response.ToString());
+
+            if (String.IsNullOrEmpty(reply.LoginData.ContextKey))
+            {
+                return null;
+            }
+
+            return reply;
         }
         
 
-        public string GetUserToken(string json)
-        {
-            var token = JObject.Parse(json);
-            return token["LoginData"]["ContextKey"].ToString();
-        }
+
     }
 }

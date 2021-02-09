@@ -12,20 +12,20 @@ namespace MELCloudAPILib
         {
             HttpClient _httpClient = new HttpClient();
 
-            using (var content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "application/json"))
+            var content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "application/json");
+          
+            HttpResponseMessage result = _httpClient.PostAsync(url, content).Result;
+
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                HttpResponseMessage result = _httpClient.PostAsync(url, content).Result;
-
-                if (result.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    return null;
-                }
-
-                var json = result.Content.ReadAsStringAsync().Result;
-                var response = JObject.Parse(json);
-
-                return response;
+                return null;
             }
+
+            var json = result.Content.ReadAsStringAsync().Result;
+            var response = JObject.Parse(json);
+
+            return response;
+            
         }
 
         public JObject SendHTTPRequestAsGet(object data, string url, Dictionary<string, string> headers)

@@ -38,6 +38,9 @@
     <Compile Include="Login.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Utilities.cs" />
+    <Compile Include="LoginReply.cs" />
+    <Compile Include="ListDevices.cs" />
+    <Compile Include="ListDevicesReply.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

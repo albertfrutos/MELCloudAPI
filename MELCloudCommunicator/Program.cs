@@ -15,13 +15,27 @@ namespace MELCloudCommunicator
             var email = "my_email";
             var password = "my_password";
 
-            var token = new Login().UserLogin(email, password, config);
-            var headers = new Dictionary<string, string>() {
-              { "X-MitsContextKey", token }
-            };
-            var devices = new Utilities().SendHTTPRequestAsGet("", config.BaseUrl + "/User/ListDevices", headers);
+            var loginReply = new Login().UserLogin(email, password, config);
+
+            if (loginReply == null)
+            {
+                Console.WriteLine("There was a problem while loggin in...");
+                return;
+            }
+
+            var token = new LoginReply().GetToken(loginReply);
+
+            if (String.IsNullOrEmpty(token)) {
+                Console.WriteLine("ERROR: Token could not be acquired.");
+                return;
+            }
 
             Console.WriteLine("Token is: " + token);
+
+
+            var devicesList = new ListDevices().GetDevices(token, config);
+
+
 
             Console.ReadLine();
         }
